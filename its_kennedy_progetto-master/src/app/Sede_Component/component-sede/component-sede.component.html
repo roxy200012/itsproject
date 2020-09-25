@@ -1,0 +1,126 @@
+<div class="container">
+    <div class="col">
+        <div *ngIf="DateUser.Admin_Status;else NonAdmin" class="row">
+
+          <div style="margin-top: 30px;"  class="col-md-auto">
+              <button  [routerLink]="['/Home/sedi/'+id+'/Studenti']" class="card" style="width: 18rem;">
+                <img src="assets/img/studenti.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h2 class="card-text">Studenti</h2>
+                </div>
+               
+              </button>
+            </div>
+    
+          <div style="margin-top: 30px;"  class="col-md-auto">
+              <button [routerLink]="['/Home/sedi/'+id+'/pc']"  class="card" style="width: 18rem;">
+                <img src="../../../assets/img/Toshiba.png" class="card-img-top" alt="..." style="width:240px;height:183px;">
+                <div class="card-body">
+                  <h2 class="card-text">Computer</h2>
+                </div>
+               
+              </button>
+            </div>
+    
+            <div style="margin-top: 30px;"  class="col-md-auto">
+                <button [routerLink]="['/Home/sedi/'+id+'/movimenti']"  class="card" style="width: 18rem;">
+                  <img src="../../../assets/img/sarrows.png" class="card-img-top" alt="..." style="width:240px;height:183px;">
+                  <div class="card-body">
+                    <h2 class="card-text">Movimenti</h2>
+                  </div>
+                 
+                </button>
+              </div>
+              <div style="margin-top: 30px;"  class="col-md-auto">
+                <button [routerLink]="['/Home/sedi/'+id+'/manutentore']"  class="card" style="width: 18rem;">
+                  <img src="../../../assets/img/75-753603_cogs-vector-transparent-grey-gears-png.png" class="card-img-top" alt="..." style="width:240px;height:170px;">
+                  <div class="card-body">
+                    <h2 class="card-text">Manutentori</h2>
+                  </div>
+                 
+                </button>
+              </div>
+              <div style="margin-top: 30px;"  class="col-md-auto">
+                <button [routerLink]="['/Home/sedi/'+id+'/movimenti_manutentore']"  class="card" style="width: 18rem;">
+                  <img src="../../../assets/img/movimentimanu.jpg" class="card-img-top" alt="..." style="width:240px;height:170px;">
+                  <div class="card-body">
+                    <h2 class="card-text">Manutenzioni</h2>
+                  </div>
+                 
+                </button>
+              </div>
+              <div style="margin-top: 30px;"  class="col-md-auto">
+                <button [routerLink]="['/Home/sedi/'+id+'/etichette']"  class="card" style="width: 18rem;">
+                  <img src="../../../assets/img/2244567.jpg" class="card-img-top" alt="..." style="width:210px;height:170px;">
+                  <div class="card-body">
+                    <h2 class="card-text">Etichette</h2>
+                  </div>
+                 
+                </button>
+              </div>
+              
+          </div>
+        </div>
+        <!-- ------------------------------------------------------------------------------------------------------------ -->
+      <ng-template   #NonAdmin>
+            <div class="col-md-auto" >
+              <div  class="row">
+                <div style="margin-top: 30px;"  class="col-md-auto">
+                    <button [routerLink]="['/Home/sedi/'+id+'/Studenti']"  class="card" style="width: 18rem;">
+                      <img src="assets/img/studenti.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h2 class="card-text">Studenti</h2>
+                      </div>
+                      
+                    </button>
+                  </div>
+          
+                <div style="margin-top: 30px;"  class="col-md-auto">
+                    <button [routerLink]="['/Home/sedi/'+id+'/pc']"  class="card" style="width: 18rem;">
+                      <img src="../../../assets/img/Toshiba.png" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h2 class="card-text">Computer</h2>
+                      </div>
+                    </button>
+                  </div>
+          
+                  <div style="margin-top: 30px;"  class="col-md-auto">
+                      <button [routerLink]="['/Home/sedi/'+id+'/movimenti']"  class="card" style="width: 18rem;">
+                        <img src="../../../assets/img/sarrows.png"  class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h2 class="card-text">Movimenti</h2>
+                        </div>
+                      </button>
+                    </div>
+                    <div style="margin-top: 30px;"  class="col-md-auto">
+                      <button [routerLink]="['/Home/sedi/'+id+'/manutentore']"  class="card" style="width: 18rem;">
+                        <img src="../../../assets/img/75-753603_cogs-vector-transparent-grey-gears-png.png" class="card-img-top" alt="..." style="width:240px;height:170px;">
+                        <div class="card-body">
+                          <h2 class="card-text">Manutentori</h2>
+                        </div>
+                       
+                      </button>
+                    </div>
+                    <div style="margin-top: 30px;"  class="col-md-auto">
+                      <button [routerLink]="['/Home/sedi/'+id+'/movimenti_manutentore']"  class="card" style="width: 18rem;">
+                        <img src="../../../assets/img/movimentimanu.jpg" class="card-img-top" alt="..." style="width:240px;height:170px;">
+                        <div class="card-body">
+                          <h2 class="card-text">Manutenzioni</h2>
+                        </div>
+                       
+                      </button>
+                    </div>
+                    <div style="margin-top: 30px;"  class="col-md-auto">
+                      <button [routerLink]="['/Home/sedi/'+id+'/etichette']"  class="card" style="width: 18rem;">
+                        <img src="../../../assets/img/2244567.jpg" class="card-img-top" alt="..." style="width:210px;height:170px;">
+                        <div class="card-body">
+                          <h2 class="card-text">Etichette</h2>
+                        </div>
+                       
+                      </button>
+                    </div>
+            </div>
+          </div>
+          </ng-template>
+        
+</div>

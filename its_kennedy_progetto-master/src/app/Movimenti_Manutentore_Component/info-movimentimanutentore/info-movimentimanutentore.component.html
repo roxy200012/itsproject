@@ -1,0 +1,36 @@
+<div class="container">
+  <div style="margin-top: 50px;" class="col">
+    <div *ngIf="movimento">
+      <div class="row">
+        <div>
+          <h2 style="border-bottom: 5px solid ;">{{movimento.data_consegna| date: 'dd-MM-yyyy'}} </h2>
+        </div>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <div class="col">
+          <div class="row">
+            <h5>Fattura n°: {{movimento.N_Fattura_Riparazione}} </h5>
+          </div>
+          <div class="row">
+            <h5>Motivo: {{movimento.note_movimento}} </h5>
+          </div>
+          <div class="row" *ngIf="movimento.note==null">
+            <h5 style="display: none;">Note: </h5>
+          </div>
+          <div class="row" *ngIf="movimento.note!=null">
+            <h5>Note: {{movimento.note}} </h5>
+          </div>
+          <div class="row">
+            <h5>Manutentore: {{movimento.nome}} {{movimento.cognome}}</h5>
+          </div>
+
+
+
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,259 @@
+<div class="container">
+  <div class="col">
+    <div class="row justify-content-center">
+      <h1 style="border-bottom: 4px solid;">Movimento</h1>
+    </div>
+  </div>
+  <div class="col">
+    <div class="row">
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+        aria-expanded="false" aria-controls="collapseExample" style="margin-left :-140px;">
+        Menu
+      </button>
+
+    </div>
+    <div class="row">
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ConsegnaModel">
+            Nuovo Movimento
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-6">
+    <div class="row">
+
+      <div class="col-md-2">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#filtroCollaps"
+          aria-expanded="false" aria-controls="collapseExample">
+          Filtre
+        </button>
+      </div>
+
+
+
+      <div style="margin-bottom: 10px;" class="row">
+
+        <div class="collapse" id="filtroCollaps">
+          <div class="card card-body">
+            <div class="row">
+              <div class="col">
+                <button class="btn btn-outline-secondary" type="button" (click)="getALL()">Tutti</button>
+              </div>
+              <div class="col">
+                <button class="btn btn-outline-secondary" type="button" (click)="getConsegne()">Consegne</button>
+              </div>
+              <div class="col">
+                <button class="btn btn-outline-secondary" type="button" (click)="getritiri()">Ritiri</button>
+              </div>
+              <div class="col">
+                <button class="btn btn-outline-secondary" type="button" (click)="getguasti()">Guasti</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <table class="table" style="margin-left :-140px;">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Nome Cognome</th>
+          <th scope="col">Corso</th>
+          <th scope="col">Data di Consegna/Ritiro</th>
+          <th scope="col">Alimentatore</th>
+          <th scope="col">Cavo Rete</th>
+          <th scope="col">mouse</th>
+          <th scope="col">borsa</th>
+          <th scope=" col">Connettore ethernet</th>
+          <th scope="col">Connettore usb</th>
+          <th scope="col">hdd</th>
+          <th scope="col">note</th>
+          <th scope="col">Motivo</th>
+          <th scope="col">Admin</th>
+          <th scope="col">PC</th>
+          <th scope="col">Info</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let m of Lista_Movimenti">
+          <td>{{m.nome}} {{m.cognome}}</td>
+          <td>{{m.corso}}</td>
+          <td>{{m.data_consegna|date: 'dd-MM-yyyy'}}</td>
+          <td *ngIf="m.alimentatore==0">si</td>
+          <td *ngIf="m.alimentatore==1">no</td>
+          <td *ngIf="m.cavo_rete==0">si</td>
+          <td *ngIf="m.cavo_rete==1">no</td>
+          <td *ngIf="m.mouse==0">si</td>
+          <td *ngIf="m.mouse==1">no</td>
+          <td *ngIf="m.borsa==0">si</td>
+          <td *ngIf="m.borsa==1">no</td>
+          <td *ngIf="m.con_ethernet==0">si</td>
+          <td *ngIf="m.con_ethernet==1">no</td>
+          <td *ngIf="m.con_usb==0">si</td>
+          <td *ngIf="m.con_usb==1">no</td>
+          <td *ngIf="m.hdd==0">si</td>
+          <td *ngIf="m.hdd==1">no</td>
+          <td>{{m.note}}</td>
+          <td>{{m.note_movimento}}</td>
+          <td>{{m.ADMIN_idADMIN}}</td>
+          <td>{{m.PC_idpc}}</td>
+
+
+          <td><button [routerLink]="[m.idMOVIMENTO]" style="border-radius: 50px;" type="button"
+              class="btn btn-link"><img style="width: 25px;" src="assets/img/info.png" alt=""></button></td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="ConsegnaModel" tabindex="-1" aria-labelledby="ConsegnaModelLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Consegna Computer</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form name="insertForm" #f="ngForm" (ngSubmit)="f.form.valid && AddConsegna()">
+          <div class="modal-body">
+            <div style="border-bottom: 1px solid;" class="form-group">
+
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" (click)="GetPC_Disponibili()"
+                  [(ngModel)]="upPC.STATO_idSTATO" [(ngModel)]="New_Movimento.STATO_idSTATO"
+                  [ngModelOptions]="{standalone: true}" #consegnaStat value="3" name="inlineRadioOptions"
+                  id="inlineRadio1">
+                <label class="form-check-label" for="inlineRadio1">Consegna</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" (click)="GetPC_status(3)" [(ngModel)]="upPC.STATO_idSTATO"
+                  [(ngModel)]="New_Movimento.STATO_idSTATO" #ritiroPC="ngModel" [ngModelOptions]="{standalone: true}"
+                  name="inlineRadioOptions" id="inlineRadio2" value="2">
+                <label class="form-check-label" for="inlineRadio2">Ritiro</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" (click)="GetPC_status(3)" [(ngModel)]="upPC.STATO_idSTATO"
+                  [(ngModel)]="New_Movimento.STATO_idSTATO" #guasto="ngModel" [ngModelOptions]="{standalone: true}"
+                  name="inlineRadioOptions" id="inlineRadio3" value="4">
+                <label class="form-check-label" for="inlineRadio3">Guasto</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Computer</label>
+              <select [(ngModel)]="New_Movimento.PC_idpc" #idAdmin="ngModel" [(ngModel)]="id_pc" class="form-control"
+                id="inputAdmin" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let s of Lista_PC" [value]="s.idpc">{{s.Seriale}}</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Studente</label>
+              <select [(ngModel)]="New_Movimento.UTENTE_idUTENTE" id="inputUtente" #idUtente="ngModel"
+                class="form-control" [ngModelOptions]="{standalone: true}">
+
+                <option *ngFor="let s of Lista_Studente" [value]="s.idUTENTE">{{s.cognome}} {{s.nome}}</option>
+              </select>
+            </div>
+
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="inputState">Mouse</label>
+                <select #mouse="ngModel" [(ngModel)]="New_Movimento.mouse" id="inputState" class="form-control"
+                  [ngModelOptions]="{standalone: true}">
+                  <option value="0">Si</option>
+                  <option value="1">No</option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="inputState">Borsa</label>
+                <select #borsa="ngModel" [(ngModel)]="New_Movimento.borsa" id="inputBorsa" class="form-control"
+                  [ngModelOptions]="{standalone: true}">
+
+                  <option value="0">Si</option>
+                  <option value="1">No</option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="inputState">Alimentatore</label>
+                <select #alimentatore="ngModel" [(ngModel)]="New_Movimento.alimentatore" id="inputBorsa"
+                  class="form-control" [ngModelOptions]="{standalone: true}">
+
+                  <option value="0">Si</option>
+                  <option value="1">No</option>
+                </select>
+              </div>
+            </div>
+
+
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="inputState">Cavo Di Rete</label>
+                <select #cavo_rete="ngModel" [(ngModel)]="New_Movimento.cavo_rete" id="inputcavo_rete"
+                  class="form-control" [ngModelOptions]="{standalone: true}">
+                  <option value="0">Si</option>
+                  <option value="1">No</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="inputState">Con Usb</label>
+                <select #con_usb="ngModel" [(ngModel)]="New_Movimento.con_usb" id="inputcon_usb" class="form-control"
+                  [ngModelOptions]="{standalone: true}">
+
+                  <option value="0">Si</option>
+                  <option value="1">No</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="inputState">Con Ethernet</label>
+                <select #alimentatore="ngModel" [(ngModel)]="New_Movimento.con_ethernet" id="inputBorsa"
+                  class="form-control" [ngModelOptions]="{standalone: true}">
+                  <option value="0">Si</option>
+                  <option value="1">No</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="inputState">Hdd</label>
+                <select #Hdd="ngModel" [(ngModel)]="New_Movimento.hdd" id="inputHdd" class="form-control"
+                  [ngModelOptions]="{standalone: true}">
+                  <option value="0">Si</option>
+                  <option value="1">No</option>
+                </select>
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Note</label>
+              <textarea class="form-control" [(ngModel)]="New_Movimento.note" #Note="ngModel"
+                [ngModelOptions]="{standalone: true}" id="exampleFormControlTextarea1" rows="3"
+                maxlength=500></textarea>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Motivo</label>
+              <textarea class="form-control" [(ngModel)]="New_Movimento.note_movimento" #Note="ngModel"
+                [ngModelOptions]="{standalone: true}" id="exampleFormControlTextarea1" rows="3"
+                maxlength=500></textarea>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>

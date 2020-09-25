@@ -1,0 +1,84 @@
+<div class="container">
+    <div style="margin-top: 50px;" class="col">
+        <div *ngIf="pc">
+            <div class="row">
+                <div>
+                    <h2 style="border-bottom: 5px solid ;">{{pc.Seriale}}</h2>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:10px">
+                <div class="col">
+                    <div class="row">
+                        <h5>Marca:{{pc.marca}}</h5>
+                    </div>
+                    <div class="row">
+                        <h5>Modello:{{pc.modello}} </h5>
+                    </div>
+                    <div class="row">
+                        <h5>Acquistato il: {{pc.data_Acquisto|date: 'dd-MM-yyyy'}}</h5>
+                    </div>
+                    <div class="row">
+                        <h5> N° inventario: {{pc.n_inventario}}</h5>
+                    </div>
+                    <div class="row">
+                        <h5> N° fattura: {{pc.n_fattura}}</h5>
+                    </div>
+                    <div class="row" *ngIf="pc.note!=null">
+                        <h5>Note: {{pc.note}}</h5>
+                    </div>
+                    <div class="row" *ngIf="pc.note==null">
+                        <h5 style="display: none;">Note: </h5>
+                    </div>
+                    <div class="row">
+                      <h5>CPU: {{pc.cpu}}</h5>
+                    </div>
+                    <div class="row">
+                        <h5>Ram: {{pc.ram}}GB</h5>
+                      </div>
+                      <div class="row">
+                        <h5>Memoria: {{pc.Memoria}}GB</h5>
+                      </div>
+                      <div class="row">
+                        <h5>Tipo di memoria: {{pc.Tipo_memoria}}</h5>
+                      </div>
+                    <div class="row" *ngIf="pc.consegna;else NonConsegnato">
+                        <h5> Stato: Consegnato</h5>
+                    </div>
+                    <ng-template #NonConsegnato>
+                        <div class="row" *ngIf="pc.ritiro;else NonRitirato">
+                            <h5> Stato: Ritirato</h5>
+                        </div>
+                        <ng-template #NonRitirato>
+                            <div class="row" *ngIf="pc.guasto;else NonGuasto">
+                                <h5>Stato: Guasto</h5>
+                            </div>
+                            <ng-template #NonGuasto>
+                                <div class="row" *ngIf="pc.riparazione;else NonRiparato">
+                                    <h5>Stato: Riparazione</h5>
+                                </div>
+                                <ng-template #NonRiparato>
+                                    <div class="row" *ngIf="pc.ko;else NonKo">
+                                        <h5>Stato: Morto</h5>
+                                    </div>
+                                    <ng-template #NonKo>
+                                        <div class="row">
+                                            <h5>Stato: Nuovo</h5>
+                                        </div>
+                                    </ng-template>
+                                </ng-template>
+                            </ng-template>
+                        </ng-template>
+                    </ng-template>
+                    
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

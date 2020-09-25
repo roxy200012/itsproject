@@ -1,0 +1,25 @@
+<div class="container">
+    <div style="margin-top: 50px;" class="col">
+        <div *ngIf="Manutentore">
+            <div class="row">
+                <div>
+                    <h2 style="border-bottom: 5px solid ;">{{Manutentore.nome}} {{Manutentore.cognome}} </h2>
+                </div>
+            </div>
+            <div class="row" style="margin-top:10px">
+                <div class="col">
+                    <div class="row">
+                        <h5>Indirizzo: {{Manutentore.via}},{{Manutentore.civico}}
+                            {{Manutentore.comune}}({{Manutentore.provincia_sigla}}) </h5>
+                    </div>
+                    <div class="row">
+                        <h5>Lavora per : {{Manutentore.ditta}} </h5>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

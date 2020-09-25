@@ -1,0 +1,193 @@
+<div class="container">
+  <div class="col">
+    <div class="row justify-content-center">
+      <h1 style="border-bottom: 4px solid;">Movimento Manutentore</h1>
+    </div>
+  </div>
+  <div class="col">
+    <div class="row">
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+        aria-expanded="false" aria-controls="collapseExample" style="margin-left :-140px;">
+        Menu
+      </button>
+
+    </div>
+    <div class="row">
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RiparazioneModel">
+            Nuovo Movimento
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="row">
+
+      <div class="col-md-2">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#filtroCollaps"
+          aria-expanded="false" aria-controls="collapseExample">
+          Filtre
+        </button>
+      </div>
+
+
+
+      <div style="margin-bottom: 10px;" class="row">
+
+        <div class="collapse" id="filtroCollaps">
+          <div class="card card-body">
+            <div class="row">
+               <div class="col">
+                <button class="btn btn-outline-secondary" type="button" (click)="getALL()">Tutti</button>
+              </div>
+              <div class="col">
+                <button class="btn btn-outline-secondary" type="button" (click)="getConsegne()">riparazione</button>
+              </div>
+              <div class="col">
+                <button class="btn btn-outline-secondary" type="button" (click)="getritiri()">Ritiri </button>
+              </div>
+              <div class="col">
+                <button class="btn btn-outline-secondary" type="button" (click)="getko()">ko</button>
+              </div> 
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <table class="table" style="margin-left :-140px;">
+    <thead class="thead-dark">
+      <tr>
+
+        <th scope="col">Data di Consegna/Restituzione</th>
+        <th scope="col">note</th>
+        <th scope="col">Motivazione</th>
+        <th scope="col">Admin</th>
+        <th scope="col">PC</th>
+        <th scope="col">Manutentore</th>
+        <th scope="col">Info</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of Lista_Movimenti">
+        <td>{{m.data_consegna|date: 'dd-MM-yyyy'}}</td>
+        <td>{{m.note}}</td>
+        <td>{{m.note_movimento}}</td>
+        <td>{{m.ADMIN_idADMIN}}</td>
+        <td>{{m.PC_idpc}}</td>
+        <td>{{m.MANUTENTORE_idMANUTENTORE}}</td>
+        <td><button [routerLink]="[m.idMOVIMENTO_MANUTENTORE]" style="border-radius: 50px;" type="button"
+            class="btn btn-link"><img style="width: 25px;" src="assets/img/info.png" alt=""></button></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+
+  <div class="modal fade" id="RiparazioneModel" tabindex="-1" aria-labelledby="RiparazioneModelLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nuova Manutenzione</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form name="insertForm" #f="ngForm" (ngSubmit)="f.form.valid && Save()">
+            <div class="modal-body">
+              <div style="border-bottom: 1px solid;" class="form-group">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" (click)="GetPC_status(5)"
+                    [(ngModel)]="upPC.STATO_idSTATO" [(ngModel)]="newMovimenti.STATO_idSTATO" #ritiroPC="ngModel"
+                    [ngModelOptions]="{standalone: true}" name="inlineRadioOptions" id="inlineRadio2" value="2">
+                  <label class="form-check-label" for="inlineRadio2">Ritiro</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" (click)="GetPC_status(5)"
+                    [(ngModel)]="upPC.STATO_idSTATO" [(ngModel)]="newMovimenti.STATO_idSTATO" #morto="ngModel"
+                    [ngModelOptions]="{standalone: true}" name="inlineRadioOptions" id="inlineRadio4" value="6">
+                  <label class="form-check-label" for="inlineRadio4">KO</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" (click)="GetPC_status(4)"
+                    [(ngModel)]="upPC.STATO_idSTATO" [(ngModel)]="newMovimenti.STATO_idSTATO" #riparazione="ngModel"
+                    [ngModelOptions]="{standalone: true}" name="inlineRadioOptions" id="inlineRadio3" value="5">
+                  <label class="form-check-label" for="inlineRadio3">Riparazione</label>
+                </div>
+
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Computer</label>
+              <select [(ngModel)]="newMovimenti.PC_idpc" #idpc="ngModel" [(ngModel)]="id_pc" class="form-control"
+                id="inputPc" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let s of ListaPc" [value]="s.idpc">{{s.Seriale}}</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Admin</label>
+              <select [(ngModel)]="newMovimenti.ADMIN_idADMIN" #idAdmin="ngModel" class="form-control"
+                [ngModelOptions]="{standalone: true}">
+
+                <option *ngFor="let s of Lista_Admin" [value]="s.idADMIN">{{s.Cognome_Admin}} {{s.Nome_Admin}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Manutentore</label>
+              <select [(ngModel)]="newMovimenti.MANUTENTORE_idMANUTENTORE" id="inputUtente" #idManutentore="ngModel"
+                class="form-control" [ngModelOptions]="{standalone: true}">
+
+                <option *ngFor="let s of Lista_Manutentori" [value]="s.idMANUTENTORE">{{s.cognome}} {{s.nome}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Fattura</label>
+              <input class="form-control" id="exampleFormControlInput1" [(ngModel)]="newMovimenti.N_Fattura_Riparazione"
+                #fattura="ngModel" [ngModelOptions]="{standalone: true}" :hover="border 0,5px solid grey">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputRam">Data </label>
+              <input type="date" [(ngModel)]="newMovimenti.data_consegna" #Date="ngModel" class="form-control"
+                id="inputDate" [ngModelOptions]="{standalone: true}" maxlength="8" required>
+              <div style="color: red;" *ngIf="Date.invalid">
+                <div *ngIf="Date.errors.required">
+                  Campo obbligatorio.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Note</label>
+              <textarea class="form-control" [(ngModel)]="newMovimenti.note" #Note="ngModel"
+                [ngModelOptions]="{standalone: true}" id="exampleFormControlTextarea1" rows="3"
+                maxlength=500></textarea>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Motivo</label>
+              <textarea class="form-control" [(ngModel)]="newMovimenti.note_movimento" #Note="ngModel"
+                [ngModelOptions]="{standalone: true}" id="exampleFormControlTextarea1" rows="3"
+                maxlength=500></textarea>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

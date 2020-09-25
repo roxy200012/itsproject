@@ -1,0 +1,7 @@
+<div class="row" *ngFor="let pc of listaPC" >
+    <div  class="col" *ngIf="pc.STATO_idSTATO==1">
+         <qr-code  [value]="'https://ict.tecnicosuperiorekennedy.it/assist/?code='+pc.Seriale" [size]="150"></qr-code>
+          <h5>{{pc.Seriale}}</h5>
+        </div>
+   
+</div>

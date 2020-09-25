@@ -1,0 +1,155 @@
+<div class="container">
+  <div class="col">
+    <div style="margin-top: 20px;" class="row justify-content-center">
+      <h1 style="border-bottom: 4px solid;">Manutentori</h1>
+    </div>
+  </div>
+</div>
+<ng-template #NonAdmin>
+
+</ng-template>
+<div class="col">
+  <div class="row">
+    <div class="col-6">
+      <div class="row " style="margin-left:2px;">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+          New Manutentore
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Nome Cognome</th>
+        <th scope="col">Ditta</th>
+        <th scope="col">Info</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of ListManutentori">
+        <td>{{m.nome}} {{m.cognome}}</td>
+        <td>{{m.ditta}}</td>
+        <td><button [routerLink]="[m.idMANUTENTORE]" style="border-radius: 50px;" type="button"
+            class="btn btn-link"><img style="width: 25px;" src="assets/img/info.png" alt=""></button></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <div class="modal " id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog "
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Aggiungi manutentore</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <form name="insertForm" #f="ngForm" (ngSubmit)="f.form.valid && savemanu()">
+            <div class="form-row">
+
+              <div class="col-md-6 mb-6">
+                <label for="Nome">Nome</label>
+                <input type="text" [(ngModel)]="manutentore.nome" [ngModelOptions]="{standalone: true}" #nome="ngModel"
+                  class="form-control" name="Nome" id="Nome" value="" required maxlength="70">
+                <div style="color: red;" *ngIf="nome.invalid">
+                  <div *ngIf="nome.errors.required">
+                    Campo obbligatorio.
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-md-6 mb-6">
+                <label for="Cognome">Cognome</label>
+                <input type="text" [(ngModel)]="manutentore.cognome" [ngModelOptions]="{standalone: true}"
+                  #Cognome="ngModel" class="form-control" id="Cognome" name="Cognome" value="" required maxlength="70">
+                <div style="color: red;" *ngIf="Cognome.invalid">
+                  <div *ngIf="Cognome.errors.required">
+                    Campo obbligatorio.
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="col-md-6 mb-6">
+              <label for="Comune">Comune</label>
+              <input type="text" [(ngModel)]="manutentore.comune" [ngModelOptions]="{standalone: true}"
+                #Comune="ngModel" class="form-control" name="Comune" id="Comune" value="" required maxlength="100">
+              <div style="color: red;" *ngIf="Comune.invalid">
+                <div *ngIf="Comune.errors.required">
+                  Campo obbligatorio.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-6">
+              <label for="Residenza">Via</label>
+              <input type="text" [(ngModel)]="manutentore.via" [ngModelOptions]="{standalone: true}"
+                #Residenza="ngModel" class="form-control" name="Residenza" id="Residenza" required maxlength="45">
+              <div style="color: red;" *ngIf="Residenza.invalid">
+                <div *ngIf="Residenza.errors.required">
+                  Campo obbligatorio.
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class=" col-md-6 mb-6">
+                <label for="Civico">Civico</label>
+                <input type="text" [(ngModel)]="manutentore.civico" [ngModelOptions]="{standalone: true}"
+                  #Civico="ngModel" class="form-control" name="Civico" id="Civico" value="" required maxlength="10">
+                <div style="color: red;" *ngIf="Civico.invalid">
+                  <div *ngIf="Civico.errors.required">
+                    Campo obbligatorio.
+                  </div>
+                </div>
+              </div>
+
+                <div class="col-md-6 mb-6">
+                  <label for="Provincia">Province</label>
+                  <input type="text" [(ngModel)]="manutentore.provincia_sigla" [ngModelOptions]="{standalone: true}"
+                    #Provincia="ngModel" class="form-control" name="Provincia" id="Provincia" value="" required
+                    maxlength="4">
+                  <div style="color: red;" *ngIf="Provincia.invalid">
+                    <div *ngIf="Provincia.errors.required">
+                      Campo obbligatorio.
+                    </div>
+                  </div>
+                </div>
+            </div>
+              <div class="col-md-6 mb-6">
+                <label for="Ditta">Ditta</label>
+                <input type="text" [(ngModel)]="manutentore.ditta" [ngModelOptions]="{standalone: true}"
+                  #Ditta="ngModel" class="form-control" name="Ditta" id="Ditta" value="" required maxlength="18">
+                <div style="color: red;" *ngIf="Ditta.invalid">
+                  <div *ngIf="Ditta.errors.required">
+                    Campo obbligatorio.
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col">
+                <div class="form-row">
+                  <div class="col-md-6 mb-3">
+                    <button type="button" class="btn btn-secondary" (click)="ClearValue()"
+                      data-dismiss="modal">Close</button>
+                  </div>
+                  <div class="col-md-6 mb-3"><button class="btn btn-primary" type="submit">Aggiungi</button>
+                  </div>
+                </div>
+              </div>
+            
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>

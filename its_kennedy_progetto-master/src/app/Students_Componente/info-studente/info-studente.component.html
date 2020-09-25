@@ -1,0 +1,58 @@
+<div class="container">
+    <div style="margin-top: 50px;" class="col">
+      <div *ngIf="studente">
+        <div class="row">
+          <div>
+            <h2 style="border-bottom: 5px solid ;">{{studente.nome}} {{studente.cognome}} </h2>
+          </div>
+        </div>
+        
+        <div class="row" style="margin-top:10px">
+          <div class="col">
+              <div class="row">
+                <h5>Corso:{{studente.corso}}</h5>
+            </div>
+            <div class="row">
+              <h5>Indirizzo: {{studente.via}},{{studente.civico}} {{studente.comune}} ({{studente.provincia_sigla}}) </h5>
+            </div>
+            <div class="row">
+              <h5>Nato a: {{studente.luogo_nascita}}  il: {{studente.data_nascita|date: 'dd-MM-yyyy'}}</h5>
+            </div>
+            <div>
+              <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#model">Cambia</button>
+            
+          </div>
+          </div>
+          <div class="modal fade" id="model" tabindex="-1">
+            <div class="modal-dialog">
+              <form name="insertForm" #f="ngForm" (ngSubmit)="f.form.valid && Change()">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Cambia frequenza</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <label>Frequenta</label>
+                  <select [(ngModel)]="studente.frequentazione" #f="ngModel" [ngModelOptions]="{standalone: true}">
+                    <option   value=1>si</option>
+                    <option  value=0>no</option>
+                  </select>
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+                  <button type="submit" class="btn btn-primary" >Save changes</button>
+                </div>
+              </div>
+            </form>
+            </div>
+          </div>
+           
+        </div>
+  
+      </div>
+    </div>
+  
+  </div>
